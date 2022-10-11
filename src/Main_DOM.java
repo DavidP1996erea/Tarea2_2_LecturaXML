@@ -41,7 +41,9 @@ public class Main_DOM {
                     System.out.println("Ticket " + element.getElementsByTagName("ticket").item(0).getTextContent());
                     System.out.println("Descripción " + element.getElementsByTagName("descripcion").item(0).getTextContent());
                     System.out.println("Precio " + element.getElementsByTagName("precio_unidad").item(0).getTextContent());
-                   // System.out.println("Descuento " + element.getElementsByTagName("descuento").item(0).getTextContent());
+
+                   if(element.getElementsByTagName("descuento").item(0)!=null){
+                    System.out.println("Descuento " + element.getElementsByTagName("descuento").item(0).getTextContent());}
 
                 }
 
