@@ -11,8 +11,7 @@ public class Main_DOM {
     public static void main(String[] args) {
 
 
-
-        try{
+        try {
             File comprasXml = new File("archivoCompras.xml");
 
             //Objetos para leer el fichero
@@ -22,44 +21,78 @@ public class Main_DOM {
             DocumentBuilder db = dbf.newDocumentBuilder();
 
             //Se pasa el xml
-            Document doc =  db.parse(comprasXml);
+            Document doc = db.parse(comprasXml);
             doc.getDocumentElement().normalize();
 
-            NodeList nodeList = doc.getElementsByTagName("compra");
+            NodeList listaCompra = doc.getElementsByTagName("compra");
+
+            double sd=0;
 
 
-            for(int i=0; i< nodeList.getLength();i++){
+            for(int i=0; i< listaCompra.getLength();i++){
+
+                Node nodo = listaCompra.item(i);
+
+                if(nodo.getNodeType()==Node.ELEMENT_NODE) {
+
+                    Element e = (Element) nodo;
+                    NodeList hijos = e.getChildNodes();
+
+                    for (int j = 0; j < hijos.getLength(); j++) {
+
+                        Node hijo = hijos.item(j);
+                        if(hijo.getNodeType()==Node.ELEMENT_NODE) {
+                            Element eHijo = (Element) hijo;
+                            System.out.println(eHijo.getTextContent());
 
 
-                Node node = nodeList.item(i);
 
-                if(node.getNodeType()==Node.ELEMENT_NODE){
+                        }
+                    }
 
-                    Element element = (Element) node;
 
-                    System.out.println("Fecha " + element.getElementsByTagName("fecha").item(0).getTextContent());
-                    System.out.println("Ticket " + element.getElementsByTagName("ticket").item(0).getTextContent());
-                    System.out.println("Descripción " + element.getElementsByTagName("descripcion").item(0).getTextContent());
-                    System.out.println("Precio " + element.getElementsByTagName("precio_unidad").item(0).getTextContent());
-
-                   if(element.getElementsByTagName("descuento").item(0)!=null){
-                    System.out.println("Descuento " + element.getElementsByTagName("descuento").item(0).getTextContent());}
 
                 }
 
 
-
+                System.out.println("Suma total del producto: " + sd);
+                sd=0;
             }
 
 
+          /* for (int i = 0; i < listaCompra.getLength(); i++) {
+
+
+                Node node = listaCompra.item(i);
+                if (node.getNodeType() == Node.ELEMENT_NODE){
+
+                    Element eElement = (Element) node;
+
+                        System.out.println("Marca: "+ eElement.getElementsByTagName("producto").item(i).getTextContent());
+
+                    }
 
 
 
-        }catch (Exception e){
-            e.printStackTrace();
-        }
 
 
+                System.out.println("Suma total del producto: " + sd);
+                sd = 0;
+            }
+*/
 
+
+    }catch(
+    Exception p)
+
+    {
+        p.printStackTrace();
     }
+
+
 }
+}
+
+/*
+
+ */
