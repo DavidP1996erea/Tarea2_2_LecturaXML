@@ -54,6 +54,16 @@ public class SaxHelper extends DefaultHandler {
             System.out.println("Descuento: " + new String(ch, inicio, length));
             return;
         }
+
+        if(unidades){
+            System.out.println("unidades: " + new String(ch, inicio, length));
+            return;
+        }
+
+        if(fecha){
+            System.out.println("fecha: " + new String(ch, inicio, length));
+            return;
+        }
     }
 
 }
