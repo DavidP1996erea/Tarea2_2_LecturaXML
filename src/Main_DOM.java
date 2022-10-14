@@ -63,12 +63,14 @@ public class Main_DOM {
 
                                     Element hijoDelHijito = (Element) hijito;
 
-                                    compraDia+=Double.parseDouble(hijoDelHijito.getElementsByTagName("precio_unidad").item(0).getTextContent());
+
 
                                     if(hijoDelHijito.getElementsByTagName("unidades").item(0)==null){
                                         totalProductoDia++;
+                                        compraDia+=Double.parseDouble(hijoDelHijito.getElementsByTagName("precio_unidad").item(0).getTextContent());
                                     }else {
                                         totalProductoDia +=Double.parseDouble(hijoDelHijito.getElementsByTagName("unidades").item(0).getTextContent());
+                                        compraDia+=Double.parseDouble(hijoDelHijito.getElementsByTagName("precio_unidad").item(0).getTextContent())*totalProductoDia;
                                     }
 
                                     if(hijoDelHijito.getElementsByTagName("descuento").item(0)!=null) {
