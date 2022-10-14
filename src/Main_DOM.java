@@ -38,24 +38,46 @@ public class Main_DOM {
                     Element e = (Element) nodo;
                     NodeList hijos = e.getChildNodes();
 
+
+                    System.out.println(e.getElementsByTagName("fecha").item(0).getTextContent());
+                    System.out.println(e.getElementsByTagName("ticket").item(0).getTextContent());
                     for (int j = 0; j < hijos.getLength(); j++) {
 
                         Node hijo = hijos.item(j);
                         if(hijo.getNodeType()==Node.ELEMENT_NODE) {
+
                             Element eHijo = (Element) hijo;
-                            System.out.println(eHijo.getTextContent());
+                            NodeList hijoDelHijo = eHijo.getChildNodes();
+
+
+
+
+                            for(int m =0; m<hijoDelHijo.getLength();m++){
+
+                                Node hijito = hijoDelHijo.item(m);
+
+                                if(hijito.getNodeType()==Node.ELEMENT_NODE) {
+
+                                    Element hijoDelHijito = (Element) hijito;
+
+                                    sd += Double.parseDouble(hijoDelHijito.getElementsByTagName("precio_unidad").item(0).getTextContent());
+
+
+                                }
+
+
+                            }
 
 
 
                         }
+
                     }
-
-
-
                 }
 
 
                 System.out.println("Suma total del producto: " + sd);
+
                 sd=0;
             }
 
