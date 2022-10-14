@@ -26,7 +26,10 @@ public class Main_DOM {
 
             NodeList listaCompra = doc.getElementsByTagName("compra");
 
-            double sd=0;
+            double compraDia=0;
+            double totalProductoDia=0;
+            double descuentoProducto=0;
+            double resumenTotalCompra=0;
 
 
             for(int i=0; i< listaCompra.getLength();i++){
@@ -60,8 +63,17 @@ public class Main_DOM {
 
                                     Element hijoDelHijito = (Element) hijito;
 
-                                    sd += Double.parseDouble(hijoDelHijito.getElementsByTagName("precio_unidad").item(0).getTextContent());
+                                    compraDia+=Double.parseDouble(hijoDelHijito.getElementsByTagName("precio_unidad").item(0).getTextContent());
 
+                                    if(hijoDelHijito.getElementsByTagName("unidades").item(0)==null){
+                                        totalProductoDia++;
+                                    }else {
+                                        totalProductoDia +=Double.parseDouble(hijoDelHijito.getElementsByTagName("unidades").item(0).getTextContent());
+                                    }
+
+                                    if(hijoDelHijito.getElementsByTagName("descuento").item(0)!=null) {
+                                        descuentoProducto += Double.parseDouble(hijoDelHijito.getElementsByTagName("descuento").item(0).getTextContent());
+                                    }
 
                                 }
 
@@ -76,32 +88,15 @@ public class Main_DOM {
                 }
 
 
-                System.out.println("Suma total del producto: " + sd);
-
-                sd=0;
+                System.out.println("Suma total del producto: " + compraDia);
+                System.out.println("Total productos: " + totalProductoDia);
+                System.out.println("Total descuento " + descuentoProducto);
+                resumenTotalCompra = compraDia-descuentoProducto;
+                System.out.println("Resumen total compra " + resumenTotalCompra);
+                compraDia=0;
+                totalProductoDia=0;
+                descuentoProducto=0;
             }
-
-
-          /* for (int i = 0; i < listaCompra.getLength(); i++) {
-
-
-                Node node = listaCompra.item(i);
-                if (node.getNodeType() == Node.ELEMENT_NODE){
-
-                    Element eElement = (Element) node;
-
-                        System.out.println("Marca: "+ eElement.getElementsByTagName("producto").item(i).getTextContent());
-
-                    }
-
-
-
-
-
-                System.out.println("Suma total del producto: " + sd);
-                sd = 0;
-            }
-*/
 
 
     }catch(
