@@ -15,6 +15,8 @@ public class SaxHelper extends DefaultHandler {
 
 
     double precioTotal =0;
+    int cantidadProductos;
+    double descuentosDia=0;
 
     @Override
     public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
@@ -34,18 +36,15 @@ public class SaxHelper extends DefaultHandler {
                 break;
 
             case "precio_unidad":
-
                 precio_unidadA = true;
-
-
                 break;
 
             case "unidades":
-                descuentoA = true;
+                unidadesA = true;
                 break;
 
             case "descuento":
-                unidadesA = true;
+                descuentoA= true;
                 break;
             default:
                 break;
@@ -65,18 +64,21 @@ public class SaxHelper extends DefaultHandler {
         }
         if (descripcionA) {
             System.out.println("Descripcion: " + new String(ch, inicio, length));
+            cantidadProductos++;
 
             return;
         }
 
         if (precio_unidadA) {
             System.out.println("Precio unidad: " + new String(ch, inicio, length));
+            precioTotal+= Double.parseDouble(new String(ch, inicio, length));
             return;
         }
 
+
         if (descuentoA) {
             System.out.println("Descuento: " + new String(ch, inicio, length));
-
+            descuentosDia+= Double.parseDouble(new String(ch, inicio, length));
             return;
         }
 
@@ -91,9 +93,14 @@ public class SaxHelper extends DefaultHandler {
         switch (elementos) {
 
             case "ticket":
-                System.out.println("El precio total del día es:" + precioTotal);
+                System.out.println("El precio total del día es: " + precioTotal);
+                System.out.println("la cantidad de productos total del día es: " + cantidadProductos);
+                System.out.println("Descuento total del día es: " + descuentosDia);
+                System.out.println("Total del día: " + (precioTotal-descuentosDia));
                 ticketA = false;
                 precioTotal=0;
+                cantidadProductos=0;
+                descuentosDia=0;
 
                 System.out.println("Se termino el ticket \n");
                 break;
@@ -111,12 +118,11 @@ public class SaxHelper extends DefaultHandler {
                 break;
 
             case "unidades":
-                descuentoA = false;
+                unidadesA = false;
                 break;
 
             case "descuento":
-
-                unidadesA = false;
+                descuentoA  = false;
                 break;
             default:
 
