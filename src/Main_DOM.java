@@ -24,6 +24,7 @@ public class Main_DOM {
             Document doc = db.parse(comprasXml);
             doc.getDocumentElement().normalize();
 
+            //Primer nodo de lectura
             NodeList listaCompra = doc.getElementsByTagName("compra");
 
             double compraDia=0;
@@ -31,6 +32,11 @@ public class Main_DOM {
             double descuentoProducto=0;
             double resumenTotalCompra=0;
 
+            /**
+             * Con el primer bucle se lee los hijos de compra, con el segundo los hijos de ticket y con el último
+             * los productos. De esta forma se puede acceder a los datos de los productos de todos los tickets y
+             * dividirlos por días
+             */
 
             for(int i=0; i< listaCompra.getLength();i++){
 

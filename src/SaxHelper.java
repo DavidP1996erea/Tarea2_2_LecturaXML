@@ -5,6 +5,9 @@ import org.xml.sax.helpers.DefaultHandler;
 
 public class SaxHelper extends DefaultHandler {
 
+    /**
+     * Se crean las variables booleanas de las etiquetas que queremos leer
+     */
     boolean fechaA = false;
     boolean descripcionA = false;
     boolean precio_unidadA = false;
@@ -18,6 +21,23 @@ public class SaxHelper extends DefaultHandler {
     int cantidadProductos;
     double descuentosDia=0;
 
+    /**
+     * Este método se activará cuando encuentre una etiqueta de apertura. Con el switch le indicamos que cuando lea
+     * en la etiqueta cada uno de los casos propuestos, cambie el booleano a true, indicando que lo ha leído
+     *
+     * @param uri The Namespace URI, or the empty string if the
+     *        element has no Namespace URI or if Namespace
+     *        processing is not being performed.
+     * @param localName The local name (without prefix), or the
+     *        empty string if Namespace processing is not being
+     *        performed.
+     * @param qName The qualified name (with prefix), or the
+     *        empty string if qualified names are not available.
+     * @param attributes The attributes attached to the element.  If
+     *        there are no attributes, it shall be an empty
+     *        Attributes object.
+     * @throws SAXException
+     */
     @Override
     public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
         super.startElement(uri, localName, qName, attributes);
@@ -55,6 +75,14 @@ public class SaxHelper extends DefaultHandler {
 
     }
 
+    /**
+     * Este método se activará cuando encuentre algo escrito dentro de la etiqueta de apertura visto anteriormente.
+     * En caso de hacernos falta, se irá acumulando el precio o el descuento para luego mostrarlo por pantalla.
+     * @param ch The characters.
+     * @param inicio The start position in the character array.
+     * @param length The number of characters to use from the
+     *               character array.
+     */
     public void characters(char ch[], int inicio, int length) {
 
         if (fechaA) {
@@ -89,6 +117,23 @@ public class SaxHelper extends DefaultHandler {
 
     }
 
+    /**
+     * Este método se activará cuando encuentre una etiqueta de cierre. La etiqueta ticket está puesta para que funcione
+     * como diferenciador de compras. Cada vez que la etiqueta ticket se cierre significa que ha terminado la compra
+     * de un día, por lo que todas las operaciones necesarias deben mostrarse ahí. También ahí es donde se resetea todas
+     * las variables que necesitamos acumular por días, ya que como he dicho antes, cada vez que se cierra la etiqueta,
+     * termina un día de compra, por lo que se resetea todas las variables.
+     *
+     * @param uri The Namespace URI, or the empty string if the
+     *        element has no Namespace URI or if Namespace
+     *        processing is not being performed.
+     * @param localName The local name (without prefix), or the
+     *        empty string if Namespace processing is not being
+     *        performed.
+     * @param elementos The qualified name (with prefix), or the
+     *        empty string if qualified names are not available.
+     * @throws SAXException
+     */
     public void endElement(String uri, String localName, String elementos) throws SAXException {
         switch (elementos) {
 

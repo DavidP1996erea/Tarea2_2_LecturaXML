@@ -11,6 +11,11 @@ public class Main_SAX {
 
 
         try {
+
+            /**
+             * Se prepara el archivo XML con SAX, una vez que ejecutemos el programa se lanzará la clase SaxHelper,
+             * con con los métodos Override leerá el XML.
+             */
             SAXParserFactory factory = SAXParserFactory.newInstance();
 
             SAXParser saxParser = factory.newSAXParser();
