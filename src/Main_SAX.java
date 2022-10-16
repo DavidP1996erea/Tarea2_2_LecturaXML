@@ -9,11 +9,14 @@ import java.io.IOException;
 public class Main_SAX {
     public static void main(String[] args) {
 
-        SAXParserFactory factory = SAXParserFactory.newInstance();
 
         try {
+            SAXParserFactory factory = SAXParserFactory.newInstance();
+
             SAXParser saxParser = factory.newSAXParser();
-            saxParser.parse("archivoCompras.xml", new HandlerBase());
+            SaxHelper handler = new SaxHelper();
+            saxParser.parse("archivoCompras.xml", handler);
+
 
         } catch (ParserConfigurationException e) {
             throw new RuntimeException(e);
@@ -25,4 +28,5 @@ public class Main_SAX {
 
 
     }
+
 }
